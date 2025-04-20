@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:multipageapp/category_item.dart';
-import 'package:multipageapp/dummy_data.dart';
+import 'package:multipageapp/widgets/category_item.dart';
+import 'package:multipageapp/data/dummy_data.dart';
+import 'package:multipageapp/widgets/appBar.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -9,14 +10,8 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
-      appBar: AppBar(
-        title: Text(
-          'DeliMeals',
-          style: TextStyle(color: Theme.of(context).canvasColor),
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: Container(
+      appBar: myAppBar('DeliMeals'),
+      body: Container( 
         padding: EdgeInsets.all(20),
         child: GridView(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -27,7 +22,7 @@ class CategoriesScreen extends StatelessWidget {
           ),
           children:
               availableCategories
-                  .map((catData) => CategoryItem(catData.title, catData.color))
+                  .map((catData) => CategoryItem(catData.id, catData.title,catData.color))
                   .toList(),
         ),
       ),
