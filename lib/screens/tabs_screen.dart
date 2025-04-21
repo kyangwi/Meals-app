@@ -30,7 +30,9 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
+      
       bottomNavigationBar: BottomNavigationBar(
+      type: BottomNavigationBarType.fixed, 
       currentIndex: _selectedIndex,
       onTap: _onTabTapped,
       backgroundColor: Theme.of(context).primaryColor,
