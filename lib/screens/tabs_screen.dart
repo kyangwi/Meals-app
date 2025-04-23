@@ -12,33 +12,47 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    CategoriesScreen(),
-    FavoritesSreen(),
-    Center(child: Text('Add Meal')), 
-    Center(child: Text('settings'),)// You can replace this later
+  final List<Map<String, dynamic>> _screens = [
+    {'page': CategoriesScreen(), 'title': 'Category'},
+    {'page': FavoritesSreen(), 'title': 'Favorites'},
+    {'page': Center(child: Text('Add Meal')), 'title': 'Add meal'},
+    {
+      'page': Center(child: Text('settings')),
+      'title': 'Settings',
+    }, // You can replace this later
   ];
 
   void _onTabTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
-      
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text(
+          _screens[_selectedIndex]['title'],
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ),
+      body: _screens[_selectedIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
-      type: BottomNavigationBarType.fixed, 
-      currentIndex: _selectedIndex,
-      onTap: _onTabTapped,
-      backgroundColor: Theme.of(context).primaryColor,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white70,
-      items: [
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).primaryColor,
+
+        currentIndex: _selectedIndex,
+        onTap: _onTabTapped,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        selectedFontSize: 13,
+        unselectedFontSize: 13,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+
+        items: [
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.category, 0),
             label: 'Category',
@@ -51,7 +65,7 @@ class _TabScreenState extends State<TabScreen> {
             icon: _buildIcon(Icons.add, 2),
             label: 'Add meal',
           ),
-            BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: _buildIcon(Icons.settings, 3),
             label: 'Settings',
           ),
@@ -70,7 +84,7 @@ class _TabScreenState extends State<TabScreen> {
           color: _selectedIndex == index ? Colors.black26 : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         child: Icon(iconData),
       ),
     );

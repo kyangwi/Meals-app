@@ -29,8 +29,9 @@ class myApp extends StatelessWidget {
             fontFamily: 'RobotoCondensed',
             fontWeight: FontWeight.bold,
           ),
+// Set your desired color here
+    ),
         ),
-      ),
       home: TabScreen(),
       routes: {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),

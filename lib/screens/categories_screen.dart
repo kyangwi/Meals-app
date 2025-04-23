@@ -10,7 +10,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
-      appBar: myAppBar('DeliMeals'),
+      // appBar: myAppBar('DeliMeals'),
       body: Container( 
         padding: EdgeInsets.all(20),
         child: GridView(
