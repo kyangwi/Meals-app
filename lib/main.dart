@@ -19,39 +19,39 @@ class myApp extends StatefulWidget {
 }
 
 class _myAppState extends State<myApp> {
-  @override
-  Widget build(BuildContext context) {
-
     Map<String,bool> _filters = {
     'gluten':false,
     'lactose':false,
     'vegan':false,
     'vegetarian':false
   };
-
   List<Meal> availableMeals = dummyMeals;
 
-    void _setFilter(Map<String,bool> filterData){
-      setState(() {
-        _filters = filterData;
-        availableMeals=dummyMeals.where((meal){
-            if(_filters['gluten'] == true && !meal.isGlutenFree){
-                return false;
-            }
-            if(_filters['lactose'] == true && !meal.isLactoseFree){
-                return false;
-            }
-            if(_filters['vegan'] == true && !meal.isVegan){
-                return false;
-            }
-            if(_filters['vegetarian'] == true && !meal.isVegetarian){
-                return false;
-            }
-            return true;
-        }).toList();
-      });
+      void _setFilter(Map<String,bool> filterData){
+        setState(() {
+          _filters = filterData;
+          availableMeals=dummyMeals.where((meal){
+              if(_filters['gluten'] == false && !meal.isGlutenFree){
+                  return false;
+              }
+              if(_filters['lactose'] == false && !meal.isLactoseFree){
+                  return false;
+              }
+              if(_filters['vegan'] == false && !meal.isVegan){
+                  return false;
+              }
+              if(_filters['vegetarian'] == false && !meal.isVegetarian){
+                  return false;
+              }
+              return true;
+          }).toList();
+        });
 
-    }
+      }
+
+  @override
+  Widget build(BuildContext context) {
+
     
     return MaterialApp(
       title: 'Myapp',

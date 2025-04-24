@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:multipageapp/widgets/appBar.dart';
 import 'package:multipageapp/widgets/maindrawer.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -22,10 +21,10 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   void initState() {
-    _glutenFree = widget.currentFilters['gluten']!;
-    _lactoseFree = widget.currentFilters['lactose']!;
-    _vegetarian = widget.currentFilters['vegetarian']!;
-    _vegan = widget.currentFilters['vegan']!;
+    _glutenFree = widget.currentFilters['gluten'] as bool;
+    _lactoseFree = widget.currentFilters['lactose'] as bool;
+    _vegetarian = widget.currentFilters['vegetarian'] as bool;
+    _vegan = widget.currentFilters['vegan'] as bool;
 
     super.initState();
     
@@ -95,6 +94,11 @@ class _FilterScreenState extends State<FilterScreen> {
                 'vegan': _vegan,
                 'vegetarian': _vegetarian,
               };
+              print('is gluten: ${selectedFilter['gluten']}');
+              print('is lactose: ${selectedFilter['lactose']}');
+              print('is vegan: ${selectedFilter['vegan']}');
+              print('is vegetarian: ${selectedFilter['vegetarian']}');
+              
               widget.saveFilters(selectedFilter);
             },
           ),
@@ -102,7 +106,7 @@ class _FilterScreenState extends State<FilterScreen> {
       ),
       drawer: MainDrawer(),
       body: Container(
-        // padding: EdgeInsets.only(left: 10, right: 10),
+        padding: EdgeInsets.only(top: 10),
         child: Column(
           children: [
             Container(
