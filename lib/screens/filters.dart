@@ -3,9 +3,12 @@ import 'package:multipageapp/widgets/appBar.dart';
 import 'package:multipageapp/widgets/maindrawer.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
-
   static const routeName = '/filters';
+
+  final Function saveFilters;
+  final Map<String,bool> currentFilters;
+
+  FilterScreen(this.currentFilters,this.saveFilters);
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -16,6 +19,17 @@ class _FilterScreenState extends State<FilterScreen> {
   bool _vegetarian = false;
   bool _vegan = false;
   bool _lactoseFree = false;
+
+  @override
+  void initState() {
+    _glutenFree = widget.currentFilters['gluten']!;
+    _lactoseFree = widget.currentFilters['lactose']!;
+    _vegetarian = widget.currentFilters['vegetarian']!;
+    _vegan = widget.currentFilters['vegan']!;
+
+    super.initState();
+    
+  }
 
   Widget _switchbuilder(
     String title,
@@ -58,19 +72,34 @@ class _FilterScreenState extends State<FilterScreen> {
               value: currentValue,
               onChanged: updateValue,
               activeColor: Colors.teal,
-              inactiveThumbColor:Color.fromRGBO(10, 51, 51, 1),
-              
+              inactiveThumbColor: Color.fromRGBO(10, 51, 51, 1),
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar('Your Filters'),
+      appBar: AppBar(
+        title: Text('Your Filters'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () {
+              final Map<String, bool> selectedFilter = {
+                'gluten': _glutenFree,
+                'lactose': _lactoseFree,
+                'vegan': _vegan,
+                'vegetarian': _vegetarian,
+              };
+              widget.saveFilters(selectedFilter);
+            },
+          ),
+        ],
+      ),
       drawer: MainDrawer(),
       body: Container(
         // padding: EdgeInsets.only(left: 10, right: 10),

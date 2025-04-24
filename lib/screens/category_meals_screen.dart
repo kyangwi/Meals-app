@@ -3,15 +3,18 @@ import 'package:multipageapp/data/dummy_data.dart';
 import 'package:multipageapp/widgets/meal_item.dart';
 import 'package:multipageapp/models/meal.dart';
 class CategoryMealsScreen extends StatefulWidget {
+  
   static const routeName = "/category-meals";
-
-  const CategoryMealsScreen({super.key});
+  final  List<Meal> _availableMeals;
+  const CategoryMealsScreen(this._availableMeals);
 
   @override
   State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
 }
 
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+
+  
 
   late String categoryTitle;
   late List<Meal> displayedMeal;
@@ -20,17 +23,15 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void initState() {
-
     super.initState();
-    
-    
   }
+
   @override
   void didChangeDependencies() {
     if(!_loadedInitData){
         final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
         final categoryId = routeArgs['id'] as String;
-        displayedMeal = dummyMeals.where((meal) {
+        displayedMeal = widget._availableMeals.where((meal) {
               return meal.categories.contains(categoryId);
             }).toList();
         _loadedInitData = true;
