@@ -13,9 +13,9 @@ class MealDetailScreen extends StatelessWidget {
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
+          fontWeight: FontWeight.bold,
+          color: Colors.black54,
+        ),
       ),
     );
   }
@@ -28,11 +28,7 @@ class MealDetailScreen extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 8,
-            offset: Offset(0, 4),
-          )
+          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4)),
         ],
       ),
       child: child,
@@ -70,25 +66,31 @@ class MealDetailScreen extends StatelessWidget {
             buildSectionTitle("Ingredients", context),
             buildRoundedCard(
               child: Column(
-                children: selectedMeal.ingredients
-                    .map(
-                      (ingredient) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.circle, size: 8, color: Colors.black54),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                ingredient,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
+                children:
+                    selectedMeal.ingredients
+                        .map(
+                          (ingredient) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 6.0),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.circle,
+                                  size: 8,
+                                  color: Colors.black54,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    ingredient,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    )
-                    .toList(),
+                          ),
+                        )
+                        .toList(),
               ),
             ),
 
@@ -96,46 +98,62 @@ class MealDetailScreen extends StatelessWidget {
             buildSectionTitle("Steps", context),
             buildRoundedCard(
               child: Column(
-                children: selectedMeal.steps
-                    .asMap()
-                    .entries
-                    .map(
-                      (entry) => Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                children:
+                    selectedMeal.steps
+                        .asMap()
+                        .entries
+                        .map(
+                          (entry) => Column(
                             children: [
-                              CircleAvatar(
-                                radius: 14,
-                                backgroundColor: Theme.of(context).primaryColorLight,
-                                child: Text(
-                                  '${entry.key + 1}',
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 4),
-                                  child: Text(
-                                    entry.value,
-                                    style: Theme.of(context).textTheme.bodyMedium,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 14,
+                                    backgroundColor:
+                                        Theme.of(context).primaryColorLight,
+                                    child: Text(
+                                      '${entry.key + 1}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
                                   ),
-                                ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Text(
+                                        entry.value,
+                                        style:
+                                            Theme.of(
+                                              context,
+                                            ).textTheme.bodyMedium,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
+                              if (entry.key != selectedMeal.steps.length - 1)
+                                const Divider(height: 20),
                             ],
                           ),
-                          if (entry.key != selectedMeal.steps.length - 1)
-                            const Divider(height: 20),
-                        ],
-                      ),
-                    )
-                    .toList(),
+                        )
+                        .toList(),
               ),
             ),
 
             const SizedBox(height: 24),
           ],
+        ),
+      ),
+      floatingActionButton: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+
+          child: Icon(Icons.delete, color: Theme.of(context).canvasColor),
+          onPressed: () {
+            Navigator.of(context).pop(mealId);
+          },
         ),
       ),
     );

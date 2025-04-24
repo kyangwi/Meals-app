@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multipageapp/screens/category_meals_screen.dart';
 import 'package:multipageapp/screens/meal_details_sreen.dart';
 import 'package:multipageapp/screens/tabs_screen.dart';
-
+import 'package:multipageapp/screens/filters.dart';
 void main() {
   return runApp(myApp());
 }
@@ -26,16 +26,18 @@ class myApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Color.fromRGBO(10, 51, 51, 1)),
           titleLarge: TextStyle(
             fontSize: 24,
+            color: Theme.of(context).canvasColor,
             fontFamily: 'RobotoCondensed',
             fontWeight: FontWeight.bold,
           ),
-// Set your desired color here
+
     ),
         ),
       home: TabScreen(),
       routes: {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
-        MealDetailScreen.routeName:(ctx) => MealDetailScreen()
+        MealDetailScreen.routeName:(ctx) => MealDetailScreen(),
+        FilterScreen.routeName:(ctx) => FilterScreen(),
       },
     
     );

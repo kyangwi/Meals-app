@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multipageapp/screens/categories_screen.dart';
 import 'package:multipageapp/screens/favorites_sreen.dart';
+import 'package:multipageapp/widgets/maindrawer.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -35,9 +36,10 @@ class _TabScreenState extends State<TabScreen> {
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           _screens[_selectedIndex]['title'],
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
+      drawer: Drawer(backgroundColor: Colors.white, child: MainDrawer()),
       body: _screens[_selectedIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
