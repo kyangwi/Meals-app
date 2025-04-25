@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:multipageapp/screens/categories_screen.dart';
 import 'package:multipageapp/screens/favorites_sreen.dart';
 import 'package:multipageapp/widgets/maindrawer.dart';
-
+import 'package:multipageapp/models/meal.dart';
 class TabScreen extends StatefulWidget {
-  const TabScreen({super.key});
+  
+  final List<Meal> favoriteMeals;
+  
+  TabScreen(this.favoriteMeals);
 
   @override
   State<TabScreen> createState() => _TabScreenState();
@@ -12,16 +15,20 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   int _selectedIndex = 0;
+  late List<Map<String, dynamic>> _screens ;
 
-  final List<Map<String, dynamic>> _screens = [
-    {'page': CategoriesScreen(), 'title': 'Category'},
-    {'page': FavoritesSreen(), 'title': 'Favorites'},
-    {'page': Center(child: Text('Add Meal')), 'title': 'Add meal'},
-    {
-      'page': Center(child: Text('settings')),
-      'title': 'Settings',
-    }, // You can replace this later
-  ];
+  @override
+  void initState() {
+    _screens = [
+        {'page': CategoriesScreen(), 'title': 'Category'},
+        {'page': FavoritesSreen(widget.favoriteMeals), 'title': 'Favorites'},
+        {'page': Center(child: Text('Add Meal')), 'title': 'Add meal'},
+        {'page': Center(child: Text('settings')),'title': 'Settings',
+        }, // You can replace this later
+      ];
+
+    super.initState();
+  }
 
   void _onTabTapped(int index) {
     setState(() {
@@ -33,10 +40,9 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           _screens[_selectedIndex]['title'],
-          style: Theme.of(context).textTheme.titleLarge,
+
         ),
       ),
       drawer: Drawer(backgroundColor: Colors.white, child: MainDrawer()),

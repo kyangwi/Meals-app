@@ -7,7 +7,7 @@ class FilterScreen extends StatefulWidget {
   final Function saveFilters;
   final Map<String,bool> currentFilters;
 
-  FilterScreen(this.currentFilters,this.saveFilters);
+  const FilterScreen(this.currentFilters,this.saveFilters);
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -25,17 +25,10 @@ class _FilterScreenState extends State<FilterScreen> {
     _lactoseFree = widget.currentFilters['lactose'] as bool;
     _vegetarian = widget.currentFilters['vegetarian'] as bool;
     _vegan = widget.currentFilters['vegan'] as bool;
-
     super.initState();
-    
   }
 
-  Widget _switchbuilder(
-    String title,
-    String description,
-    bool currentValue,
-    Function(bool) updateValue,
-  ) {
+  Widget _switchbuilder(String title,String description,bool currentValue,Function(bool) updateValue,) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
       child: Container(
@@ -83,7 +76,9 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Filters'),
+        
+        title: Text('Your Filters',style: Theme.of(context).textTheme.titleLarge,),
+        
         actions: [
           IconButton(
             icon: Icon(Icons.save),
@@ -110,13 +105,13 @@ class _FilterScreenState extends State<FilterScreen> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(20),
               child: Text(
                 'Adjust your meal',
                 style: TextStyle(
                   color: Color.fromRGBO(20, 51, 51, 1),
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24,
                 ),
               ),
             ),

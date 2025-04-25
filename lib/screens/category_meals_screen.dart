@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:multipageapp/data/dummy_data.dart';
 import 'package:multipageapp/widgets/meal_item.dart';
 import 'package:multipageapp/models/meal.dart';
 class CategoryMealsScreen extends StatefulWidget {
@@ -39,18 +38,19 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     super.didChangeDependencies();
   }
 
-  void _removemeal(String mealId){
-    setState(() {
-      displayedMeal.removeWhere((meal)=>meal.id==mealId);
-    });
-  }
+  // void _removemeal(String mealId){
+  //   setState(() {
+  //     displayedMeal.removeWhere((meal)=>meal.id==mealId);
+  //   });
+  // }
+  
   @override
   Widget build(BuildContext context) {
  
-
+     final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    final categoryId = routeArgs['title'] as String;
     return Scaffold(
-      backgroundColor: Theme.of(context).canvasColor,
-      // appBar: myAppBar(routeArgs['title'] as String),
+      appBar:AppBar(title: Text(categoryId),),
       body: ListView.builder(
         itemBuilder: (ctx, index) {
           return MealItem(
@@ -60,7 +60,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
             duration: displayedMeal[index].duration,
             imageUrl: displayedMeal[index].imageUrl,
             title: displayedMeal[index].title,
-            removeItem: _removemeal,
           );
         },
         itemCount: displayedMeal.length,

@@ -9,7 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  final Function removeItem;
+  // final Function removeItem;
 
   const MealItem({
     required this.id,
@@ -18,7 +18,7 @@ class MealItem extends StatelessWidget {
     required this.duration,
     required this.imageUrl,
     required this.title,
-    required this.removeItem,
+    // required this.removeItem,
     super.key,
   });
 
@@ -26,11 +26,7 @@ class MealItem extends StatelessWidget {
     Navigator.of(ctx).pushNamed(
       MealDetailScreen.routeName, 
       arguments: id
-      ).then((result) => {
-        if(result!=null){
-          removeItem(result)
-        }
-      });
+      );
   }
 
   @override
